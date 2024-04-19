@@ -1,0 +1,2090 @@
+import telebot
+from telebot import types
+import time
+
+
+bot = telebot.TeleBot(token="6714121335:AAEN5tipDONhBcd5ViTTeQwJRJfo_0MXkh8")
+user_data= {
+    'group': '',
+    'obraz': '',
+    'vigladit': '',
+    'haract': ''
+}
+
+
+@bot.message_handler(commands=['start', 'go'])
+def zoo(message: telebot.types.Message):
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
+    btn1 = types.InlineKeyboardButton(text="Млекопитающие", callback_data="Млекопитающие")
+    btn2 = types.InlineKeyboardButton(text="Птицы", callback_data="Птицы")
+    btn3 = types.InlineKeyboardButton(text="Рыбы", callback_data="Рыбы")
+    btn4 = types.InlineKeyboardButton(text="Рептилии", callback_data="Рептилии")
+    text = ("Вопрос первый: Какая группа животных тебе больше нравится?")
+    keyboard.add(btn1, btn2, btn3, btn4, )
+    bot.send_message(message.chat.id, text,reply_markup=keyboard)
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Млекопитающие')
+def mlecopit(call):
+    user_data['group'] = 'Млекопитающие'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, obraz(message))
+
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Птицы')
+def pticy(call):
+    user_data['group'] = 'Птицы'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, obraz(message))
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Рыбы')
+def riby(call):
+    user_data['group'] = 'Рыбы'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, obraz(message))
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Рептилии')
+def reptil(call):
+    user_data['group'] = 'Рептилии'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, obraz(message))
+
+
+
+def obraz(message: telebot.types.Message):
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
+    btn1 = types.InlineKeyboardButton(text="Ночной", callback_data="Ночной")
+    btn2 = types.InlineKeyboardButton(text="Дневной", callback_data="Дневной")
+    btn3 = types.InlineKeyboardButton(text="Смешанный", callback_data="Смешанный")
+    btn4 = types.InlineKeyboardButton(text="Без разницы", callback_data="Без разницы")
+    text = ("Какой образ жизни ведет животное?")
+    keyboard.add(btn1, btn2, btn3, btn4, )
+    bot.send_message(message.chat.id, text, reply_markup=keyboard)
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Ночной')
+def noch(call):
+    user_data['obraz'] = 'Ночной'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message,vigladit(message))
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Дневной')
+def den(call):
+    user_data['obraz'] = 'Дневной'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, vigladit(message))
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Смешанный')
+def smesh(call):
+    user_data['obraz'] = 'Смешанный'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, vigladit(message))
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Без разницы')
+def bez_raz(call):
+    user_data['obraz'] = 'Без разницы'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, vigladit(message))
+
+
+def vigladit(message: telebot.types.Message):
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
+    btn1 = types.InlineKeyboardButton(text="Миленько", callback_data="Миленько")
+    btn2 = types.InlineKeyboardButton(text="Устрашающе ", callback_data="Устрашающе")
+    btn3 = types.InlineKeyboardButton(text="Нейтрально", callback_data="Нейтрально")
+    btn4 = types.InlineKeyboardButton(text="Без разницы", callback_data="Без разницы")
+    text = (" Как выглядит животное?")
+    keyboard.add(btn1, btn2, btn3, btn4, )
+    bot.send_message(message.chat.id, text, reply_markup=keyboard)
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Миленько')
+def milo(call):
+    user_data['vigladit'] = 'Миленько'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message,harakter(message))
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Устрашающе')
+def ustr(call):
+    user_data['vigladit'] = 'Устрашающе'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, harakter(message))
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Нейтрально')
+def neyt(call):
+    user_data['vigladit'] = 'Нейтрально'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, harakter(message))
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Без разницы')
+def bez_razd(call):
+    user_data['vigladit'] = 'Без разницы'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    time.sleep(5)
+    bot.register_next_step_handler(call.message, harakter(message))
+
+
+def harakter(message: telebot.types.Message):
+    keyboard = types.InlineKeyboardMarkup(row_width=2)
+    btn1 = types.InlineKeyboardButton(text="Спокойный", callback_data="Спокойный")
+    btn2 = types.InlineKeyboardButton(text="Игривый", callback_data="Игривый")
+    btn3 = types.InlineKeyboardButton(text="Дерзкий", callback_data="Дерзкий")
+    btn4 = types.InlineKeyboardButton(text="Милый", callback_data="Милый")
+    text = ("Какой характер у животного?")
+    keyboard.add(btn1, btn2, btn3, btn4, )
+    bot.send_message(message.chat.id, text, reply_markup=keyboard)
+
+
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Спокойный')
+def spok(call):
+    user_data['haract'] = 'Спокойный'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    bot.register_next_step_handler(call.message, result(message))
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Игривый')
+def igriv(call):
+    user_data['haract'] = 'Игривый'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    bot.register_next_step_handler(call.message, result(message))
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Дерзкий')
+def derzk(call):
+    user_data['haract'] = 'Дерзкий'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    bot.register_next_step_handler(call.message, result(message))
+
+@bot.callback_query_handler(func=lambda call: call.data == 'Милый')
+def miliy(call):
+    user_data['haract'] = 'Милый'
+    message = call.message
+    chat_id = message.chat.id
+    bot.send_message(chat_id, f'ваш выбор {call.data}')
+    bot.register_next_step_handler(call.message, result(message))
+
+#обработчик юзера для фото и шрифты, подправить сообщения +таймслип
+
+def result(message: telebot.types.Message):
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Млекопитающие',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Птицы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рыбы',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Ночной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Ночной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Дневной',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Дневной',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Смешанный',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Смешанный',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Миленько',
+                     'haract': 'Милый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Спокойный'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Игривый'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                     'obraz': 'Без разницы',
+                     'vigladit': 'Устрашающе',
+                     'haract': 'Дерзкий'
+                     }:
+        bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                               telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Устрашающе',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Нейтрально',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Спокойный'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Игривый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Дерзкий'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+    if user_data == {'group': 'Рептилии',
+                         'obraz': 'Без разницы',
+                         'vigladit': 'Без разницы',
+                         'haract': 'Милый'
+                         }:
+            bot.send_media_group(message.chat.id, [telebot.types.InputMediaPhoto(open('3332.jpg', 'rb')),
+                                                   telebot.types.InputMediaPhoto(open('photo1.png', 'rb'))])
+
+
+
+
+
+
+if __name__ == '__main__':
+    bot.polling(non_stop=True)
