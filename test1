@@ -3,7 +3,7 @@ from telebot import types
 import time
 
 
-bot = telebot.TeleBot(token="6714121335:AAEN5tipDONhBcd5ViTTeQwJRJfo_0MXkh8")
+bot = telebot.TeleBot(token="svoi")
 user_data= {
     'group': '',
     'obraz': '',
